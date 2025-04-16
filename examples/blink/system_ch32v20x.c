@@ -69,7 +69,7 @@ __I uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9}
 
 
 /* system_private_function_proto_types */
-static void SetSysClock(void);
+//static void SetSysClock(void);
 
 #ifdef SYSCLK_FREQ_HSE
 static void SetSysClockToHSE( void );
@@ -96,9 +96,11 @@ static void SetSysClockTo96_HSI( void );
 #elif defined SYSCLK_FREQ_120MHz_HSI
 static void SetSysClockTo120_HSI( void );
 #elif defined SYSCLK_FREQ_144MHz_HSI
-static void SetSysClockTo144_HSI( void );
+
 
 #endif
+
+static void SetSysClockTo144_HSI( void );
 
 /*********************************************************************
  * @fn      SystemInit
@@ -115,8 +117,19 @@ void SystemInit (void)
   RCC->CTLR &= (uint32_t)0xFEF6FFFF;
   RCC->CTLR &= (uint32_t)0xFFFBFFFF;
   RCC->CFGR0 &= (uint32_t)0xFF00FFFF;
-  RCC->INTR = 0x009F0000;    
+  RCC->INTR = 0x009F0000;   
+  SetSysClockTo144_HSI(); 
  // SetSysClock();
+}
+
+
+void FirmwareDelay(uint32_t n)
+{
+	for(;n;n--)
+	{
+		uint32_t i = 0XFFFF;
+		while(i--){__NOP();}
+	}
 }
 
 
@@ -202,7 +215,7 @@ void SystemCoreClockUpdate (void)
  * @brief   Configures the System clock frequency, HCLK, PCLK2 and PCLK1 prescalers.
  *
  * @return  none
- */
+ 
 static void SetSysClock(void)
 {
   //GPIO_IPD_Unused();
@@ -237,9 +250,9 @@ static void SetSysClock(void)
  
  /* If none of the define above is enabled, the HSI is used as System clock
   * source (default after reset) 
-	*/ 
+	
 }
-
+*/
 
 #ifdef SYSCLK_FREQ_HSE
 
@@ -952,6 +965,10 @@ static void SetSysClockTo120_HSI(void)
  *
  * @return  none
  */
+
+
+#endif
+
 static void SetSysClockTo144_HSI(void)
 {
     EXTEN->EXTEN_CTR |= EXTEN_PLL_HSI_PRE;
@@ -982,6 +999,3 @@ static void SetSysClockTo144_HSI(void)
     {
     }
 }
-
-
-#endif

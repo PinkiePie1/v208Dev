@@ -21,6 +21,7 @@ extern uint32_t SystemCoreClock;          /* System Clock Frequency (Core Clock)
 /* System_Exported_Functions */  
 extern void SystemInit(void);
 extern void SystemCoreClockUpdate(void);
+void FirmwareDelay(uint32_t n);
 
 #ifdef __cplusplus
 }

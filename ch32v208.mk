@@ -144,10 +144,10 @@ $(BUILD_DIR)/$(TARGET).elf: $(OBJECTS) Makefile
 	@$(SZ) $@
 
 $(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
-	$(HEX) $< $@
+	@$(HEX) $< $@
 	
 $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
-	$(BIN) $< $@	
+	@$(BIN) $< $@	
 	
 $(BUILD_DIR):
 	mkdir -p $@
