@@ -61,7 +61,7 @@ uint32_t SystemCoreClock         = SYSCLK_FREQ_120MHz_HSI;        /* System Cloc
 #elif defined SYSCLK_FREQ_144MHz_HSI
 uint32_t SystemCoreClock         = SYSCLK_FREQ_144MHz_HSI;        /* System Clock Frequency (Core Clock) */
 #else
-uint32_t SystemCoreClock         = 144000000;                    /* System Clock Frequency (Core Clock) */
+uint32_t SystemCoreClock         = HSI_VALUE;                    /* System Clock Frequency (Core Clock) */
 
 #endif
 
